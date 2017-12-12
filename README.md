@@ -7,6 +7,6 @@ Phase-field modelling is a powerful computational tool to simulate phenomena suc
 ## Examples
 
 ### Ostwald ripening
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Alt Text](./twoParticles.gif)
 
 ## Installation
