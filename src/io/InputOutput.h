@@ -32,8 +32,8 @@ public:
             xmlFile["Simulation"]["Theta"].read(theta);
             xmlFile["Numerics"]["h"].read(h);
             xmlFile["Numerics"]["RedFactor"].read(red_factor);
-            xmlFile["Output"]["OutputDatFile"].read(fileDatName);
-            xmlFile["Output"]["OutputVTKFile"].read(fileVTKName);
+            xmlFile["Output"]["OutputDatFile"].read(outDatName);
+            xmlFile["Output"]["OutputVTKFile"].read(outVTKName);
             xmlFile["Output"]["MaxIter"].read(maxIter);
             xmlFile["Output"]["FreqOutput"].read(freqOut);
 
