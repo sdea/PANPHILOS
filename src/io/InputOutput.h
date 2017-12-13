@@ -1,8 +1,8 @@
 #ifndef INPUTOUTPUT_H_INCLUDED
 #define INPUTOUTPUT_H_INCLUDED
 
-#include "ComputeSegmentation.h"
-#include "ComputeSegmentation.hh"
+#include "../src/physics/ComputeSegmentation.h"
+#include "../src/physics/ComputeSegmentation.hh"
 
 /* Header file with classes and functions for input-output */ 
 
