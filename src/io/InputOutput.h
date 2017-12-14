@@ -87,7 +87,7 @@ public:
     	T h, red_factor, dt;
     	// Parameters related to phase field simulations
     	T Q, eps, M, theta, cosTheta;
-	bool SMobility;
+	plint SMobility;
     	// Output files names
     	std::string outDatName, outVTKName;
     	// For variables
