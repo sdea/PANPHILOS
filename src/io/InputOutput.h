@@ -32,7 +32,7 @@ public:
             xmlFile["Simulation"]["Theta"].read(theta);
             xmlFile["Numerics"]["h"].read(h);
             xmlFile["Numerics"]["RedFactor"].read(red_factor);
-            xmlFile["Numerics"]["SurfMobility"].read(red_factor);
+            xmlFile["Numerics"]["SurfMobility"].read(SMobility);
             xmlFile["Output"]["OutputDatFile"].read(outDatName);
             xmlFile["Output"]["OutputVTKFile"].read(outVTKName);
             xmlFile["Output"]["MaxIter"].read(maxIter);
