@@ -9,13 +9,12 @@
 namespace plb {
 // === List of wrapper functions around data processors 
 template<typename T>
-void compute_SBM_CH_step(std::vector<MultiBlock3D* >& blocksForSim, Box3D dmn, SimulationParameter3D<T>& param) {
+void compute_SBM_CH_step(std::vector<MultiBlock3D* >& blocksForSim, Box3D dmn, SimulationParameter3D<T>& param, bool SM) {
 	
      // Apply processing functional on the blocks
      T eps2 = param.eps*param.eps;
      T invH2 = 1./(param.h*param.h);
-     applyProcessingFunctional(new solveSBM3D<T>(eps2, param.Q, invH2, param.dt, param.M , param.h, param.cosTheta),
-		     			dmn , blocksForSim);
+     applyProcessingFunctional(new solveSBM3D<T>(eps2, param.Q, invH2, param.dt, param.M , param.h, param.cosTheta, SM), dmn , blocksForSim);
 
 }
 
