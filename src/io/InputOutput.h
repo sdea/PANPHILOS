@@ -32,6 +32,7 @@ public:
             xmlFile["Simulation"]["Theta"].read(theta);
             xmlFile["Numerics"]["h"].read(h);
             xmlFile["Numerics"]["RedFactor"].read(red_factor);
+            xmlFile["Numerics"]["SurfMobility"].read(red_factor);
             xmlFile["Output"]["OutputDatFile"].read(outDatName);
             xmlFile["Output"]["OutputVTKFile"].read(outVTKName);
             xmlFile["Output"]["MaxIter"].read(maxIter);
@@ -70,6 +71,7 @@ public:
             pcout << "*      DAT output name:  " << this->outDatName << std::endl;
             pcout << "*      MaxIter:          " << this->maxIter << std::endl;
             pcout << "*      FreqOut:          " << this->freqOut << std::endl;
+            pcout << "*      SurfMobility:     " << this->SMobility << std::endl;
             pcout << "" << std::endl;
             pcout << "===========================================================" << std::endl;
             pcout << "===========================================================" << std::endl;
@@ -85,6 +87,7 @@ public:
     	T h, red_factor, dt;
     	// Parameters related to phase field simulations
     	T Q, eps, M, theta, cosTheta;
+	bool SMobility;
     	// Output files names
     	std::string outDatName, outVTKName;
     	// For variables
