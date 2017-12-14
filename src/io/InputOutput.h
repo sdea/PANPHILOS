@@ -77,8 +77,8 @@ public:
 
 public:
 
-	 // XML input file name
-	 std::string fileCName, filePsiName;
+	// XML input file name
+	std::string fileCName, filePsiName;
     	// Dimension of geometry 2D
     	plint nx, ny, nz;
     	// Integration and derivation constants^M
