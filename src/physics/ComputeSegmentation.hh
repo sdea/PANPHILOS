@@ -42,7 +42,7 @@ void ComputeSegmentation<T>::processGenericBlocks(Box3D domain, std::vector<Atom
                 plint iZ_Psi = iZ + offset_Psi.z;
 
 		// Perform segmetation
-		if(Psi.get(iX_Psi, iY_Psi, iZ_Psi) >= 0.5) {
+		if(Psi.get(iX_Psi, iY_Psi, iZ_Psi) <= 0.5) {
 
 			geom.get(iX, iY, iZ) = 1;
 		}
