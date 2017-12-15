@@ -43,7 +43,8 @@ public:
 
             /// Assign remaining parameters
             const T dim_domain = 3;
-            dt = red_factor*std::pow(h,4)/(M*std::pow(2, 2*dim_domain +1));
+	    const T MaxM = 1.;
+            dt = red_factor*std::pow(h,4)/(MaxM*std::pow(2, 2*dim_domain +1));
 
             const T pi = 3.14159265;
             cosTheta = std::cos((theta*pi)/180.);
