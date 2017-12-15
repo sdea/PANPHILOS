@@ -12,7 +12,7 @@ namespace plb {
 // =================================================================================================
 // =================== I N P U T ===================================================================
 
-// Class of simulation parameters
+//  Class of simulation parameters
 template <typename T>
 class SimulationParameter3D {
 public:
