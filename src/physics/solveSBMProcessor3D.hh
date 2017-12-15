@@ -122,8 +122,8 @@ void solveSBM3D<T>::processGenericBlocks(Box3D domain, std::vector<AtomicBlock3D
 				T psi2 = psi*psi;
 
 				// G function
-				T G = psi6*(10.*psi2 - 15.*psi + 6.);
-				T dG = psi5*(80.*psi2 - 105.*psi + 36.);
+				G = psi6*(10.*psi2 - 15.*psi + 6.);
+				dG = psi5*(80.*psi2 - 105.*psi + 36.);
 
 			} 
 
