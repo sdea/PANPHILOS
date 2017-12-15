@@ -4,8 +4,9 @@
 #include "solveSBMProcessor3D.h"
 
 template<typename T>
-solveSBM3D<T>::solveSBM3D(T eps2_, T Q_, T invh2_, T dt_, T M_, T h_, T cosTheta_, bool SM_):
-                    eps2(eps2_), Q(Q_), invh2(invh2_), dt(dt_), M(M_), h(h_), cosTheta(cosTheta_), SM(SM_) { }
+solveSBM3D<T>::solveSBM3D(T eps2_, T Q_, T invh2_, T dt_, T M_, T h_, T cosTheta_, bool SM_, bool useG_):
+                    eps2(eps2_), Q(Q_), invh2(invh2_), dt(dt_), M(M_), h(h_), cosTheta(cosTheta_), SM(SM_),
+		    useG(useG_)	{ }
 
 // Override generic process method
 template<typename T>
@@ -108,19 +109,23 @@ void solveSBM3D<T>::processGenericBlocks(Box3D domain, std::vector<AtomicBlock3D
 			T dMc = 2*M*C.get(iX_C,iY_C,iZ_C)*(1. - C.get(iX_C,iY_C,iZ_C))*
 				(1. - 2.*C.get(iX_C,iY_C,iZ_C));
 
-			// Compute the polinomial function G and its deivatives
-			T psi = Psi.get(iX_Psi,iY_Psi,iZ_Psi);
-			T psi6 = std::pow(psi, 6);
-			T psi5 = std::pow(psi, 5);
-			T psi2 = psi*psi;
-
-			// G function
-			// T G = psi6*(10.*psi2 - 15.*psi + 6);
-			// T dG = psi*5(80.*psi2 - 105*psi + 36);
-
-        		// Test
-        		T G = 1.;
+			// Default (useG == false)
+			T G = 1.;
 			T dG = 0.;
+
+			if (useG == true) {
+				
+				// Compute the polinomial function G and its deivatives
+				T psi = Psi.get(iX_Psi,iY_Psi,iZ_Psi);
+				T psi6 = std::pow(psi, 6);
+				T psi5 = std::pow(psi, 5);
+				T psi2 = psi*psi;
+
+				// G function
+				T G = psi6*(10.*psi2 - 15.*psi + 6.);
+				T dG = psi5*(80.*psi2 - 105.*psi + 36.);
+
+			} 
 
 			// Derivatives of surface mobility
 			T dxM = G*dMc*dxC + Mc*dG*dxPsi;
@@ -128,15 +133,13 @@ void solveSBM3D<T>::processGenericBlocks(Box3D domain, std::vector<AtomicBlock3D
 			T dzM = G*dMc*dzC + Mc*dG*dzPsi;
 
 			// Dot produt dM * dMu
-			T dotdMdMu = dxM*dxMu + dyM*dyMu;
+			T dotdMdMu = dxM*dxMu + dyM*dyMu + dzM*dzMu;
 
 			// Update C
 			C.get(iX_C,iY_C,iZ_C) += dt*(Mc*dotdMu_dPsiOvPsi + dotdMdMu +
 								Mc*G*laplacianMu);
                 }
-
-
-            }
+	    }
          }
      } // end for
 }

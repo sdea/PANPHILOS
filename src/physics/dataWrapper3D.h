@@ -14,7 +14,7 @@ void compute_SBM_CH_step(std::vector<MultiBlock3D* >& blocksForSim, Box3D dmn, S
      // Apply processing functional on the blocks
      T eps2 = param.eps*param.eps;
      T invH2 = 1./(param.h*param.h);
-     applyProcessingFunctional(new solveSBM3D<T>(eps2, param.Q, invH2, param.dt, param.M , param.h, param.cosTheta, param.SMobility), dmn , blocksForSim);
+     applyProcessingFunctional(new solveSBM3D<T>(eps2, param.Q, invH2, param.dt, param.M , param.h, param.cosTheta, param.SMobility, param.useG), dmn , blocksForSim);
 
 }
 

@@ -12,7 +12,7 @@ class solveSBM3D : public BoxProcessingFunctional3D {
 public:
 
     // Constructor
-    solveSBM3D(T eps2_, T Q_, T invh2_, T dt_, T M_, T h_, T cosTheta_, bool SM_);
+    solveSBM3D(T eps2_, T Q_, T invh2_, T dt_, T M_, T h_, T cosTheta_, bool SM_, bool useG_);
     virtual void processGenericBlocks(Box3D domain, std::vector<AtomicBlock3D*> atomicBlocks);
     virtual solveSBM3D<T> * clone() const;
     virtual void getTypeOfModification(std::vector<modif::ModifT>& modified) const;
@@ -30,6 +30,7 @@ private:
     T h;
     T cosTheta;
     bool SM;
+    bool useG;
 
 };
 
