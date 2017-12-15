@@ -136,7 +136,7 @@ void solveSBM3D<T>::processGenericBlocks(Box3D domain, std::vector<AtomicBlock3D
 			T dotdMdMu = dxM*dxMu + dyM*dyMu + dzM*dzMu;
 
 			// Update C
-			C.get(iX_C,iY_C,iZ_C) += dt*(Mc*dotdMu_dPsiOvPsi + dotdMdMu +
+			C.get(iX_C,iY_C,iZ_C) += dt*(Mc*G*dotdMu_dPsiOvPsi + dotdMdMu +
 								Mc*G*laplacianMu);
                 }
 	    }
