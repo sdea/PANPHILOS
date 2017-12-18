@@ -124,6 +124,17 @@ void writeSingleVTK(MultiScalarField3D<T>& field, std::string filename, plint it
         vtkOut.template writeData<float>(field, "orderParameter", 1.);
 }
 
+// Handy function to write a general VTK file 
+// Used for utility makeVTKfromDat
+template <typename T>
+void writeGeneralVTK3D(MultiScalarField3D<T>& field, std::string filename, std::string fieldName) {
+          
+	 VtkImageOutput3D<T> vtkOut(filename, 1.);
+         vtkOut.template writeData<float>(field, fieldName, 1.);
+ }
+
+
+
 
 // Write a full VTK with segmented structure in it
 template <typename T>
