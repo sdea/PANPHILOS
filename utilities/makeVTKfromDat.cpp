@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     if (argc != 5) {
        
        std::cout << "Wrong number of input paramters" << std::endl;
-       std::cout << "File name required!!!" << std::endl;
+       std::cout << "File name and dimensions  required!!!" << std::endl;
        return -1;
 
     }
