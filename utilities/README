@@ -1,0 +1,15 @@
+# This folder contatins the source file for building the utility:
+# * makeVTKfromDat
+
+The executable takes a .dat file as input and makes a vti file as output.
+The same name (of the input file) is kept during the conversion
+
+** USAGE:
+
+	makeVTKfromDat <string inputFileName> <int nx> <int ny> <int nz> 
+
+** WARNING:
+  	
+	A wrong number of input parameters causes the termination of the program
+        A wrong type of input parameters results in unexpected behaviour
+
