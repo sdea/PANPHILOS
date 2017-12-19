@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!-- Configuration parameters for 3D phase-field simulations -->
+<Geometry>
+	<inputCFile>   /home/sdea/PhaseField/PANPHILOS/testContactAngle/Disconnection/outputDisconnection/dat/C000000000990000</inputCFile>
+    <inputPsiFile> /home/sdea/PhaseField/PANPHILOS/testContactAngle/Disconnection/input/PsiDisconnectionDelta5OffSet.dat </inputPsiFile> 
+    <size>
+    	<!-- Number of grid nodes in each space direction. -->
+        <nx> 151 </nx>
+        <ny> 151 </ny>
+	<nz> 151 </nz>
+    </size>
+</Geometry>
+
+<Simulation>
+	<Q> 1. </Q>
+	<Epsilon> 1.57 </Epsilon>
+	<Mobility> 16. </Mobility>
+	<!-- Contact angle for three phase sistems: [deg] -->
+	<Theta>    120. </Theta> 
+</Simulation>
+
+<Numerics>
+	<h> 1. </h>
+	<RedFactor> 0.7 </RedFactor>
+	<SurfMobility> true   </SurfMobility>
+	<useG>	       true  </useG>
+</Numerics>
+
+<Output>
+	<!-- Output file names and time-loop variables         -->
+	<OutputDatFile> /home/sdea/PhaseField/PANPHILOS/testContactAngle/Disconnection/outputDisconnection/dat/C </OutputDatFile> 
+	<OutputVTKFile> /home/sdea/PhaseField/PANPHILOS/testContactAngle/Disconnection/outputDisconnection/vtk/Cvtk  </OutputVTKFile>
+	<MaxIter> 	100000000000 </MaxIter>
+	<InitIter>	990000       </InitIter>
+	<FreqOutput>    10000	     </FreqOutput>
+</Output>
