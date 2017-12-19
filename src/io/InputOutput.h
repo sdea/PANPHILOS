@@ -37,6 +37,7 @@ public:
             xmlFile["Output"]["OutputDatFile"].read(outDatName);
             xmlFile["Output"]["OutputVTKFile"].read(outVTKName);
             xmlFile["Output"]["MaxIter"].read(maxIter);
+            xmlFile["Output"]["InitIter"].read(initIter);
             xmlFile["Output"]["FreqOutput"].read(freqOut);
 
 
@@ -72,6 +73,7 @@ public:
             pcout << "*      VTK output name:  " << this->outVTKName << std::endl;
             pcout << "*      DAT output name:  " << this->outDatName << std::endl;
             pcout << "*      MaxIter:          " << this->maxIter << std::endl;
+            pcout << "*      InitIter:         " << this->initIter << std::endl;
             pcout << "*      FreqOut:          " << this->freqOut << std::endl;
             pcout << "*      SurfMobility:     " << this->SMobility << std::endl;
             pcout << "*      UseG:             " << this->useG << std::endl;
@@ -94,7 +96,7 @@ public:
     	// Output files names
     	std::string outDatName, outVTKName;
     	// For variables
-    	plint maxIter, freqOut;
+    	plint maxIter, initIter, freqOut;
 };
 
 // Read geometries from file
