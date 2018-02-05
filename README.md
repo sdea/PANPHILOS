@@ -1,4 +1,4 @@
-![Logo]()
+![Logo](https://github.com/sdea/PANPHILOS/blob/master/doc/logoPanphilos2.png)
 
 # PANPHILOS - PArallel PHase-fIeLd with palabOS
 
