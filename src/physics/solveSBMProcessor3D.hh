@@ -74,8 +74,8 @@ void solveSBM3D<T>::processGenericBlocks(Box3D domain, std::vector<AtomicBlock3D
                 T dF = (Q/2.)*C.get(iX_C,iY_C,iZ_C)*(1. - C.get(iX_C,iY_C,iZ_C))*
                                                                 (1. - 2.*C.get(iX_C,iY_C,iZ_C));
 
-                mu.get(iX,iY,iZ) = dF- eps2*(dotdC_dPsiOvPsi + laplacianC) -
-                                        std::sqrt(eps2)*
+                mu.get(iX,iY,iZ) = dF - eps2*(dotdC_dPsiOvPsi + laplacianC) -
+				      	std::sqrt(eps2)*
                                         (modGPsiOvPsi*
                                         std::sqrt(2*F)*cosTheta);
 

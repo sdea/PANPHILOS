@@ -1,4 +1,6 @@
-# PANPHILOS - PArallel PHase-fIeLd with palabOS
+![Logo](https://github.com/sdea/PANPHILOS/blob/master/doc/logoPanphilos2.png)
+
+# PANPHILOS - PArallel simulatioN tool for PHase fIeld modelling using palabOS
 
 ## Introduction
 

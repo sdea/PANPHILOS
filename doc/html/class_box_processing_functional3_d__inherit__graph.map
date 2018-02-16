@@ -1,0 +1,5 @@
+<map id="BoxProcessingFunctional3D" name="BoxProcessingFunctional3D">
+<area shape="rect" id="node2" href="$classplb_1_1_compute_mean_curvature.html" title="plb::ComputeMeanCurvature\&lt; T \&gt;" alt="" coords="5,79,229,104"/>
+<area shape="rect" id="node3" href="$classplb_1_1_compute_segmentation.html" title="plb::ComputeSegmentation\&lt; T \&gt;" alt="" coords="253,79,466,104"/>
+<area shape="rect" id="node4" href="$classsolve_s_b_m3_d.html" title="solveSBM3D\&lt; T \&gt;" alt="" coords="490,79,619,104"/>
+</map>

@@ -12,14 +12,26 @@ namespace plb {
 // =================================================================================================
 // =================== I N P U T ===================================================================
 
-// Class of simulation parameters
+/**
+  * Class which incorporates the simulation parameters. 
+  * The parameters are read by the constructor from 
+  * an XML file in input. The constructor also assign
+  * dependend parameters such as dt, and converts the 
+  * contact angle from decimal to radiant
+*/
 template <typename T>
 class SimulationParameter3D {
 public:
+      
+      /**
+       * Constructor: initialize from XML file.
+       * The constructur reads the XML file in input, 
+       * and assign the parameters of the simulation.
+      */
 
       SimulationParameter3D(std::string xmlFileName) {
 
-            /// Reading xml file
+            // Reading xml file
             XMLreader xmlFile(xmlFileName.c_str());
             xmlFile["Geometry"]["inputCFile"].read(fileCName);
             xmlFile["Geometry"]["inputPsiFile"].read(filePsiName);
@@ -43,7 +55,7 @@ public:
 
 
 
-            /// Assign remaining parameters
+            // Assign remaining parameters
             const T dim_domain = 3;
 	    const T MaxM = 1.;
             dt = red_factor*std::pow(h,4)/(MaxM*std::pow(2, 2*dim_domain +1));
@@ -52,10 +64,13 @@ public:
             cosTheta = std::cos((theta*pi)/180.);
 
             }
+        /**
+	 * Print parameters to screen.
+	*/
 
         void print() {
 
-            /// Print simulation parameters to screen
+            // Print simulation parameters to screen
             pcout << "\n===========================================================" << std::endl;
             pcout << "=====  S I M U L A T I O N    P A R A M E T E R S  ========" << std::endl;
             pcout << "" << std::endl;
@@ -99,7 +114,12 @@ public:
     	plint maxIter, initIter, freqOut;
 };
 
-// Read geometries from file
+/** 
+ * Read geometries from file.
+ * The input file should be a plain text file; values
+ * are read and loaded into a MultiScalarField of 
+ * appropriate dimension.
+*/
 template <typename T>
 void readGeom3D(std::string filename, MultiScalarField3D<T> &scalarField) {
 
