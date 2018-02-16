@@ -3,6 +3,8 @@
 
 #include "../physics/ComputeSegmentation.h"
 #include "../physics/ComputeSegmentation.hh"
+#include "../physics/ComputeSegmentation2D.h"
+#include "../physics/ComputeSegmentation2D.hh"
 
 /* Header file with classes and functions for input-output */ 
 
@@ -12,26 +14,14 @@ namespace plb {
 // =================================================================================================
 // =================== I N P U T ===================================================================
 
-/**
-  * Class which incorporates the simulation parameters. 
-  * The parameters are read by the constructor from 
-  * an XML file in input. The constructor also assign
-  * dependend parameters such as dt, and converts the 
-  * contact angle from decimal to radiant
-*/
+// Class of simulation parameters
 template <typename T>
 class SimulationParameter3D {
 public:
-      
-      /**
-       * Constructor: initialize from XML file.
-       * The constructur reads the XML file in input, 
-       * and assign the parameters of the simulation.
-      */
 
       SimulationParameter3D(std::string xmlFileName) {
 
-            // Reading xml file
+            /// Reading xml file
             XMLreader xmlFile(xmlFileName.c_str());
             xmlFile["Geometry"]["inputCFile"].read(fileCName);
             xmlFile["Geometry"]["inputPsiFile"].read(filePsiName);
@@ -55,7 +45,7 @@ public:
 
 
 
-            // Assign remaining parameters
+            /// Assign remaining parameters
             const T dim_domain = 3;
 	    const T MaxM = 1.;
             dt = red_factor*std::pow(h,4)/(MaxM*std::pow(2, 2*dim_domain +1));
@@ -64,13 +54,10 @@ public:
             cosTheta = std::cos((theta*pi)/180.);
 
             }
-        /**
-	 * Print parameters to screen.
-	*/
 
         void print() {
 
-            // Print simulation parameters to screen
+            /// Print simulation parameters to screen
             pcout << "\n===========================================================" << std::endl;
             pcout << "=====  S I M U L A T I O N    P A R A M E T E R S  ========" << std::endl;
             pcout << "" << std::endl;
@@ -114,12 +101,91 @@ public:
     	plint maxIter, initIter, freqOut;
 };
 
-/** 
- * Read geometries from file.
- * The input file should be a plain text file; values
- * are read and loaded into a MultiScalarField of 
- * appropriate dimension.
-*/
+
+template <typename T>
+class SimulationParameter2D {
+public:
+
+      SimulationParameter2D(std::string xmlFileName) {
+      
+            /// Reading xml file
+            XMLreader xmlFile(xmlFileName.c_str());
+            xmlFile["Geometry"]["inputCFile"].read(fileCName);
+            xmlFile["Geometry"]["inputPsiFile"].read(filePsiName);
+            xmlFile["Geometry"]["size"]["nx"].read(nx);
+            xmlFile["Geometry"]["size"]["ny"].read(ny);
+            xmlFile["Simulation"]["Q"].read(Q);
+            xmlFile["Simulation"]["Epsilon"].read(eps);
+            xmlFile["Simulation"]["Mobility"].read(M);
+            xmlFile["Simulation"]["Theta"].read(theta);
+            xmlFile["Numerics"]["h"].read(h);
+            xmlFile["Numerics"]["RedFactor"].read(red_factor);
+            xmlFile["Numerics"]["SurfMobility"].read(SMobility);
+            xmlFile["Numerics"]["useG"].read(useG);
+            xmlFile["Output"]["OutputDatFile"].read(outDatName);
+            xmlFile["Output"]["OutputVTKFile"].read(outVTKName);
+            xmlFile["Output"]["MaxIter"].read(maxIter);
+            xmlFile["Output"]["InitIter"].read(initIter);
+            xmlFile["Output"]["FreqOutput"].read(freqOut);
+
+
+	    /// Assign remaining parameters
+            const T dim_domain = 2;
+            const T MaxM = 1.;
+            dt = red_factor*std::pow(h,4)/(MaxM*std::pow(2, 2*dim_domain +1));
+
+            const T pi = 3.14159265;
+            cosTheta = std::cos((theta*pi)/180.);
+
+            }
+
+        void print() {
+	 
+            /// Print simulation parameters to screen
+             pcout << "\n===========================================================" << std::endl;
+            pcout << "=====  S I M U L A T I O N    P A R A M E T E R S  ========" << std::endl;
+            pcout << "" << std::endl;
+            pcout << "*      Input C File:     " << this->fileCName << std::endl;
+            pcout << "*      Input Psi File:   " << this->filePsiName << std::endl;
+            pcout << "*      Nx:               " << this->nx << std::endl;
+            pcout << "*      Ny:               " << this->ny << std::endl;
+            pcout << "*      Q:                " << this->Q << std::endl;
+            pcout << "*      Eps:              " << this->eps << std::endl;
+            pcout << "*      M:                " << this->M << std::endl;
+            pcout << "*      Theta [deg]:      " << this->theta << std::endl;
+            pcout << "*      h:                " << this->h << std::endl;
+            pcout << "*      dt:               " << this->dt << std::endl;
+            pcout << "*      VTK output name:  " << this->outVTKName << std::endl;
+            pcout << "*      DAT output name:  " << this->outDatName << std::endl;
+            pcout << "*      MaxIter:          " << this->maxIter << std::endl;
+            pcout << "*      InitIter:         " << this->initIter << std::endl;
+            pcout << "*      FreqOut:          " << this->freqOut << std::endl;
+            pcout << "*      SurfMobility:     " << this->SMobility << std::endl;
+            pcout << "*      UseG:             " << this->useG << std::endl;
+            pcout << "" << std::endl;
+            pcout << "===========================================================" << std::endl;
+            pcout << "===========================================================" << std::endl;
+        }
+
+public:
+
+	// XML input file name
+	std::string fileCName, filePsiName;
+	// Dimension of geometry 2D
+	plint nx, ny;
+	// Integration and derivation constants^M
+	T h, red_factor, dt;
+	// Parameters related to phase field simulations
+	T Q, eps, M, theta, cosTheta;
+	bool SMobility, useG;
+	// Output files names
+	std::string outDatName, outVTKName;
+	// For variables
+	plint maxIter, initIter, freqOut;
+
+};
+
+// Read geometries from file
 template <typename T>
 void readGeom3D(std::string filename, MultiScalarField3D<T> &scalarField) {
 
@@ -131,6 +197,19 @@ void readGeom3D(std::string filename, MultiScalarField3D<T> &scalarField) {
     geometryFile >> scalarField;
 
 }
+
+template <typename T>
+void readGeom2D(std::string filename, MultiScalarField2D<T> &scalarField) {
+
+    plb_ifstream geometryFile(filename.c_str());
+    if (!geometryFile.is_open()) {
+            pcout << "Error: could not open geometry file " << filename << std::endl;
+            exit(EXIT_FAILURE); }
+
+    geometryFile >> scalarField;
+
+}
+
 
 // ===============================================================================================
 // ========================== O U T P U T ========================================================
@@ -146,12 +225,28 @@ void writeSingleVTK(MultiScalarField3D<T>& field, std::string filename, plint it
         vtkOut.template writeData<float>(field, "orderParameter", 1.);
 }
 
+template <typename T>
+void writeSingleVTK2D(MultiScalarField2D<T>& field, std::string filename, plint iter, plint num_zeros)
+
+{
+        VtkImageOutput2D<T> vtkOut(createFileName(filename, iter, num_zeros), 1.);
+        vtkOut.template writeData<float>(field, "orderParameter", 1.);
+}
+
+
 // Handy function to write a general VTK file 
 // Used for utility makeVTKfromDat
 template <typename T>
 void writeGeneralVTK3D(MultiScalarField3D<T>& field, std::string filename, std::string fieldName) {
           
 	 VtkImageOutput3D<T> vtkOut(filename, 1.);
+         vtkOut.template writeData<float>(field, fieldName, 1.);
+ }
+
+template <typename T>
+void writeGeneralVTK2D(MultiScalarField2D<T>& field, std::string filename, std::string fieldName) {
+
+         VtkImageOutput2D<T> vtkOut(filename, 1.);
          vtkOut.template writeData<float>(field, fieldName, 1.);
  }
 
@@ -178,6 +273,26 @@ void writeFullVTK(std::vector<MultiBlock3D* > &fields, Box3D domain, std::string
 
 }
 
+template <typename T>
+void writeFullVTK2D(std::vector<MultiBlock2D* > &fields, Box2D domain, std::string fileName, plint iter, plint num_zeros) {
+
+    pcout << "Writing VTK file..." << std::endl;
+
+    // Populate the geom scalarfield
+    applyProcessingFunctional(new ComputeSegmentation2D<T>(), domain, fields);
+    
+    // Cast back types
+    MultiScalarField2D<T>& geom = *dynamic_cast<MultiScalarField2D<T>* >(fields[0]);
+    MultiScalarField2D<T>& C = *dynamic_cast<MultiScalarField2D<T>* >(fields[1]);
+    
+    // Write VTK
+    VtkImageOutput2D<T> vtkOut(createFileName(fileName, iter, num_zeros), 1.);
+    vtkOut.template writeData<float>(C, "orderParameter", 1.);
+    vtkOut.template writeData<float>(geom, "segmentedGeom", 1.);
+    
+}
+
+
 /// Functions which write a DAT file ***
 template <typename T>
 void writeDat3D(MultiScalarField3D<T> &field, std::string filename, plint iter, plint num_images) {
@@ -191,6 +306,20 @@ void writeDat3D(MultiScalarField3D<T> &field, std::string filename, plint iter, 
     outFile  << field;
 
 };
+
+template <typename T>
+void writeDat2D(MultiScalarField2D<T> &field, std::string filename, plint iter, plint num_images) {
+
+
+    pcout << "Writing DAT file..." << std::endl;
+    std::string outputName = createFileName(filename, iter, num_images);
+
+    // Stream outfile in a text file
+    plb_ofstream outFile(outputName.c_str());
+    outFile  << field;
+
+};
+
 
 
 
