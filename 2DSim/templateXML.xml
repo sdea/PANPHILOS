@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!-- Configuration parameters for 2D phase-field simulations -->
+<Geometry>
+	<inputCFile>   /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/2DValidation/ContactAngle/input/Cini300x300_delta5.dat </inputCFile>
+	<inputPsiFile> /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/2DValidation/ContactAngle/input/PsiOffSet300x300_delta5.dat  </inputPsiFile> 
+    <size>
+    	<!-- Number of grid nodes in each space direction. -->
+        <nx> 300 </nx>
+        <ny> 300 </ny>
+    </size>
+</Geometry>
+
+<Simulation>
+	<Q> 0.4 </Q>
+	<Epsilon> 0.4472 </Epsilon>
+	<Mobility> 16. </Mobility>
+	<!-- Contact angle for three phase sistems: [deg] -->
+	<Theta>    120. </Theta> 
+</Simulation>
+
+<Numerics>
+	<h> 1. </h>
+	<RedFactor> 0.7 </RedFactor>
+	<SurfMobility> true   </SurfMobility>
+	<useG>	       true   </useG>
+</Numerics>
+
+<Output>
+	<!-- Output file names and time-loop variables         -->
+	<OutputDatFile> /mnt/mimer/mtri/ContactAngle2D/outputSMG/dat/C     </OutputDatFile> 
+	<OutputVTKFile> /mnt/mimer/mtri/ContactAngle2D/outputSMG/vtk/Cvtk  </OutputVTKFile>
+	<MaxIter> 	10000000     </MaxIter>
+	<InitIter>	0	     </InitIter>
+	<FreqOutput>    10000	     </FreqOutput>
+</Output>
