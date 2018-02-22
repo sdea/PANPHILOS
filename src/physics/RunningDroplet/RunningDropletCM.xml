@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!-- Configuration parameters for 2D phase-field simulations -->
+<Geometry>
+	<inputCFile>  /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/2DValidation/RunningDroplet/input/CiniRunningDroplet_200_200.dat  </inputCFile>
+	<inputPsiFile> /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/2DValidation/RunningDroplet/input/PsiRunningDroplet_200_200.dat  </inputPsiFile>
+        <inputThetaFile> /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/2DValidation/RunningDroplet/input/CosTheta_60_45_Nx_200_Ny_200.dat  </inputThetaFile> 
+    <size>
+    	<!-- Number of grid nodes in each space direction. -->
+        <nx> 200 </nx>
+        <ny> 200 </ny>
+    </size>
+</Geometry>
+
+<Simulation>
+	<Q> 0.4 </Q>
+	<Epsilon> 0.4472 </Epsilon>
+	<Mobility> 1. </Mobility>
+	<!-- Contact angle for three phase sistems: [deg] -->
+	<Theta>    120. </Theta> 
+</Simulation>
+
+<Numerics>
+	<h> 1. </h>
+	<RedFactor> 0.7 </RedFactor>
+	<SurfMobility> false   </SurfMobility>
+	<useG>	       false  </useG>
+</Numerics>
+
+<Output>
+	<!-- Output file names and time-loop variables         -->
+	<OutputDatFile> /mnt/mimer/mtri/RunningDroplet/output2DtestThetaCM_200_200/dat/C     </OutputDatFile> 
+	<OutputVTKFile> /mnt/mimer/mtri/RunningDroplet/output2DtestThetaCM_200_200/vtk/Cvtk  </OutputVTKFile>
+	<MaxIter> 	100000000000     </MaxIter>
+	<InitIter>	0	     </InitIter>
+	<FreqOutput>    100000     </FreqOutput>
+</Output>
