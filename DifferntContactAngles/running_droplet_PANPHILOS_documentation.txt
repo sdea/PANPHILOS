@@ -1,0 +1,39 @@
+The simulation of a “self-propelling” droplet was simulated as described in [1]. 
+The motion of the droplet on a flat surface is due to unbalanced surface tensions 
+obtained by imposing different contact angles on the left and right side of the droplet. 
+The kinetics of the process is governed by the conserved Cahn-Hilliard equation.
+The smoothed boundary method (SBM) is used to solve the following equation.
+
+? ??/?t=M?·[??(?f/??-e^2/? ?·(???)+e|??|/? v2f cos?)]
+
+Where ? is the domain parameter used in the SBM framework, ? is the order parameter for 
+the droplet in the phase field modelling, M is the mobility factor,  f is the energy 
+density, e is the gradient energy coefficient and ? is the contact angle between the 
+flat interface and the droplet. 
+A grid spacing ?x=1 was used for the simulation performed on a domain of 250 along the 
+x axis direction and 200 in the y axis direction. The initial radius of the droplet was 
+chosen equals to 40 grid points. A mobility factor of 2 and e^2=0.2 were used. The energy 
+density was expressed through a double well potential f(?)=Q/4 ?^2 (1-?)^2 where Q is the 
+height reached by the potential between the two minimum free energy states. 
+Spatial dependent boundary conditions for the contact angle were imposed, a contact angle 
+of 45 degrees was imposed on the left side of the drop and 60 degrees were imposed on the 
+right side of the computational domain. With this setup the surface energies balance, 
+expressed by the Young´s equation, satisfies the two following equations
+
+?_we-?_wd=?_de cos45       for the left side
+?_we-?_wd=?_de cos60   for the right side
+
+Where ?_we, ?_wd and ?_de are the surface energies for the wall-environment, wall-droplet 
+and droplet-environment, respectively. The model proposed can be used for simulating cases 
+where the surface energies depend on the position. 
+The hemispherical droplet relaxes from the initial condition when the contact angle with 
+the surface is 90 degrees reaching the imposed contact angle boundary conditions. Once 
+completely relaxed the droplet starts moving toward left (i.e. lower contact angle and 
+therefore lower surface energy between the wall and the droplet). The droplet motion was 
+considered to be the effect of unbalanced surface tensions due to variation of composition 
+and composition-dependent surface tensions in the space [2].
+
+[1] Y. Hui-Chia, H.-Y. Chen, and K. Thornton, Smoothed Boundary Method for Solving Partial 
+Differential Equations with General Boundary Conditions on Complex Boundaries, 2009
+[2] J.Terso, D. E. Jesson, and W. X. Tang, Running droplets of gallium from evaporation of 
+gallium arsenide, Science 324(5926), 236-238, Apr 2009
