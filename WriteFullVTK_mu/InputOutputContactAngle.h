@@ -286,12 +286,18 @@ void writeFullVTK2D(std::vector<MultiBlock2D* > &fields, Box2D domain, std::stri
     pcout << "Writing VTK file..." << std::endl;
 
     // Populate the geom scalarfield
+    // Here is where Psi gets into play. It is stored inside "fields", 
+    // The dataprocessor gets it... no need to call it inside this function 
     applyProcessingFunctional(new ComputeSegmentation2D<T>(), domain, fields);
     
     // Cast back types
     MultiScalarField2D<T>& geom = *dynamic_cast<MultiScalarField2D<T>* >(fields[0]);
     MultiScalarField2D<T>& C = *dynamic_cast<MultiScalarField2D<T>* >(fields[1]);
-    MultiScalarField2D<T>& mu = *dynamic_cast<MultiScalarField2D<T>* >(fields[2]);
+
+    // Is it mu the 3rd scalar field you put into fields? The order matters
+    // I have the doubt you are casting the wrong scalar field
+    // Easy fix: cast mu as fields[3]
+    MultiScalarField2D<T>& mu = *dynamic_cast<MultiScalarField2D<T>* >(fields[3]);
 
     // Write VTK
     VtkImageOutput2D<T> vtkOut(createFileName(fileName, iter, num_zeros), 1.);

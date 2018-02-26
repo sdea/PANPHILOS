@@ -80,6 +80,8 @@ int main(int argc, char *argv[]) {
     blocksForOutput.push_back(&geom);
     blocksForOutput.push_back(&C);
     blocksForOutput.push_back(&Psi);
+
+    // I see mu as the 4th scalar field...
     blocksForOutput.push_back(&mu);
     
     
