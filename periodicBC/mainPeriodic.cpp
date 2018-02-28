@@ -27,11 +27,14 @@ void applyNoFlux2Dfunction(MultiScalarField2D<T>& mu, MultiScalarField2D<T>& C) 
      Box2D right(nx-2, nx-1, 0, ny-1);
      Box2D bottom(0, nx-1, 0, 1);
      Box2D top(0, nx-1, ny-2, ny-1);
-     
 
+     // Domain for periodic BC
+     Box2D leftPeriodic(0, nx-2, 0, ny -1);
+     Box2D rightPeriodic(1, nx-1, 0, ny -1);
+     
      // No flux for mu
-     applyProcessingFunctional(new applyNoFluxAndPeriodic2D<T>(0,-1), left, mu);
-     applyProcessingFunctional(new applyNoFluxAndPeriodic2D<T>(0, 1), right, mu);
+     applyProcessingFunctional(new applyNoFlux2D<T>(0,-1), left, mu);
+     applyProcessingFunctional(new applyNoFlux2D<T>(0, 1), right, mu);
      applyProcessingFunctional(new applyNoFlux2D<T>(1,-1), bottom, mu);
      applyProcessingFunctional(new applyNoFlux2D<T>(1, 1), top, mu);
 

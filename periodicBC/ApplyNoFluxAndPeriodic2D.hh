@@ -18,14 +18,16 @@ void applyNoFluxAndPeriodic2D<T>::process(Box2D domain, ScalarField2D<T>& field)
                 case 0:
 	            
 		      // Here we apply periodic boundary conditions for x
-		      field.get(domain.x0, iY) = field.get(domain.x1, iY);
+		      field.get(domain.x0, iY) = field.get(domain.x1 -1, iY);
+		      field.get(domain.x1, iY) = field.get(domain.x0 +1, iY);
                     }
                 break;
 
                 case 1:
 
                     // Here we apply periodic boudary conditions for y
-		    field.get(iX, domain.y0) = field.get(iX, domain.y1);
+		    field.get(iX, domain.y0) = field.get(iX, domain.y1 -1);
+		    field.get(iX, domain.y1) = field.get(iX, domain.y0 +1);
  
 		    
                 break;
