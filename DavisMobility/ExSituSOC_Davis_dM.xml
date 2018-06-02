@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!-- Configuration parameters for 3D phase-field simulations -->
+<Geometry>
+	<inputCFile>   /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/3DSOCSim/ExSituSOC/input/CiniBigVolDelta5Stefan301x301x301.dat  </inputCFile>
+	<inputPsiFile> /home/mtri/Palabos/palabos-v1.5r1/mycodes/PhaseField/PANPHILOS/3DSOCSim/ExSituSOC/input/PsiBigVolDelta5Offset301x301x301.dat  </inputPsiFile> 
+    <size>
+    	<!-- Number of grid nodes in each space direction. -->
+        <nx> 301 </nx>
+        <ny> 301 </ny>
+	<nz> 301 </nz>
+    </size>
+</Geometry>
+
+<Simulation>
+	<Q> 0.02 </Q>
+	<Epsilon> 0.1 </Epsilon>
+	<Mobility> 1. </Mobility>
+	<a1> 1.0 </a1>
+	<a2> 0.1 </a2>
+	<a3> 0.1 </a3>
+	<!-- Contact angle for three phase sistems: [deg] -->
+	<Theta>    120. </Theta> 
+</Simulation>
+
+<Numerics>
+	<h> 1. </h>
+	<RedFactor> 0.9 </RedFactor>
+	<SurfMobility> true   </SurfMobility>
+	<useG>	       false  </useG>
+</Numerics>
+
+<Output>
+	<!-- Output file names and time-loop variables         -->
+	<OutputDatFile> /mnt/mimer/mtri/ExSituSOC/output_Davis_dM/dat/C     </OutputDatFile> 
+	<OutputVTKFile> /mnt/mimer/mtri/ExSituSOC/output_Davis_dM/vtk/Cvtk  </OutputVTKFile>
+	<MaxIter> 	10000000000 </MaxIter>
+	<InitIter>	0      </InitIter>
+	<FreqOutput>    1000	     </FreqOutput>
+</Output>

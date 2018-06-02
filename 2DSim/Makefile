@@ -17,7 +17,7 @@
 # Leading directory of the Palabos source code
 palabosRoot  =  /home/mtri/Palabos/palabos-v1.5r1
 # Name of source files in current directory to compile and link with Palabos
-projectFiles = main.cpp
+projectFiles = main_implicit.cpp
 
 # Set optimization flags on/off
 optimize     = true
