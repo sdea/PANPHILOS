@@ -1,6 +1,4 @@
 ##########################################################################
-## Makefile.
-##
 ## The present Makefile is a pure configuration file, in which 
 ## you can select compilation options. Compilation dependencies
 ## are managed automatically through the Python library SConstruct.
@@ -15,7 +13,7 @@
 #                optimFlags   = -O -finline-functions
 
 # Leading directory of the Palabos source code
-palabosRoot  =  /home/mtri/Palabos/palabos-v1.5r1
+palabosRoot  = $(PLB)
 # Name of source files in current directory to compile and link with Palabos
 projectFiles = main_implicit.cpp
 
@@ -28,7 +26,7 @@ profile      = false
 # Set MPI-parallel mode on/off (parallelism in cluster-like environment)
 MPIparallel  = true
 # Set SMP-parallel mode on/off (shared-memory parallelism)
-SMPparallel  = false
+SMPparallel  = true
 # Decide whether to include calls to the POSIX API. On non-POSIX systems,
 #   including Windows, this flag must be false, unless a POSIX environment is
 #   emulated (such as with Cygwin).
@@ -44,7 +42,7 @@ libraries    =
 # Compiler to use without MPI parallelism
 serialCXX    = g++
 # Compiler to use with MPI parallelism
-parallelCXX  = mpicxx
+parallelCXX  = /opt/intel/impi/4.1.1.036/bin/mpicxx
 # General compiler flags (e.g. -Wall to turn on all warnings on g++)
 compileFlags = -Wall -Wnon-virtual-dtor
 # General linker flags (don't put library includes into this flag)

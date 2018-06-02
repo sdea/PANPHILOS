@@ -11,8 +11,8 @@ using namespace plb;
 #include "../src/io/InputOutput.h"
 #include "../src/physics/ApplyNoFlux2DFunctional.h"
 #include "../src/physics/ApplyNoFlux2DFunctional.hh"
-#include "../src/physics/ApplyNoFluxAndPeriodic2D.h"
-#include "../src/physics/ApplyNoFluxAndPeriodic2D.hh"
+#include "./ApplyPeriodicBC2DFunctional.h"
+#include "./ApplyPeriodicBC2DFunctional.hh"
 #include "../src/physics/solveSBMProcessor2D.h"
 #include "../src/physics/solveSBMProcessor2D.hh"
 #include "../src/physics/dataWrapper2D.h"
@@ -29,20 +29,39 @@ void applyNoFlux2Dfunction(MultiScalarField2D<T>& mu, MultiScalarField2D<T>& C) 
      Box2D top(0, nx-1, ny-2, ny-1);
 
      // Domain for periodic BC
+     // The idea here is to create two shifted boxes
+     // The first (leftPeriodic) will serve to assign the left ghost layer
+     // to the last known layer
+     // The second (rightPeriodic) does the opposite and serve to 
+     // assigning the right ghost layer 
+     
+     // NOTE!!! *******************************************************************
+     // With the trick of creating these domains we avoid the sitations
+     // of performing non local operations (e.g domain.x0 = domain.x1 -1)
+     // The -1 operation is non local, because we attempt to access a cell 
+     // which can be placed in an another block (when the program runs in parallel)
+     // This is dangerous in parallel, mainly when we perform operations on the 
+     // envelope of a block (always the case when imposing BCs)
+     // ***************************************************************************
      Box2D leftPeriodic(0, nx-2, 0, ny -1);
      Box2D rightPeriodic(1, nx-1, 0, ny -1);
      
      // No flux for mu
+     // Preserve conservation of mass
      applyProcessingFunctional(new applyNoFlux2D<T>(0,-1), left, mu);
      applyProcessingFunctional(new applyNoFlux2D<T>(0, 1), right, mu);
      applyProcessingFunctional(new applyNoFlux2D<T>(1,-1), bottom, mu);
      applyProcessingFunctional(new applyNoFlux2D<T>(1, 1), top, mu);
 
-     // No-flux for C
-     // applyProcessingFunctional(new applyNoFlux2D<T>(0,-1), left, C);
-     // applyProcessingFunctional(new applyNoFlux2D<T>(0, 1), right, C);
-     // applyProcessingFunctional(new applyNoFlux2D<T>(1,-1), bottom, C);
-     // applyProcessingFunctional(new applyNoFlux2D<T>(1, 1), top, C);
+     // No-flux for C on y direction (dir = 1)
+     applyProcessingFunctional(new applyNoFlux2D<T>(1,-1), bottom, C);
+     applyProcessingFunctional(new applyNoFlux2D<T>(1, 1), top, C);
+
+     // Here we apply the periodic bounary conditions on x (dir = 0)
+     // The trick is to pass the right domains to the dataprocessor
+     applyProcessingFunctional(new applyPeriodicBC2D<T>(0,-1), leftPeriodic, C);
+     applyProcessingFunctional(new applyPeriodicBC2D<T>(0, 1), rightPeriodic, C);
+
     
 }
 
